@@ -51,6 +51,7 @@ contract Ocyticus is Base {
 		dao.resumeContract("Staking");
 	}
 
+	// @audit investigate this multisig functionality closer. There's a very good chance somewhere in the execution flow there's a mistake that allows funds to get frozen (or similarly damaging)
 	/// @notice Disable every multisig in the protocol
 	function disableAllMultisigs() public onlyDefender {
 		MultisigManager mm = MultisigManager(getContractAddress("MultisigManager"));
