@@ -86,7 +86,7 @@ contract TokenggAVAX is Initializable, ERC4626Upgradeable, UUPSUpgradeable, Base
 	/// @notice Distributes rewards to TokenggAVAX holders. Public, anyone can call.
 	/// 				All surplus `asset` balance of the contract over the internal balance becomes queued for the next cycle.
 	function syncRewards() public {
-		uint32 timestamp = block.timestamp.safeCastTo32();
+		uint32 timestamp = block.timestamp.safeCastTo32(); // @audit: doesn't the 32 bit timestamp end in 2032? Perhaps a larger uint should be used (e.g. uint40, uint48, etc.)
 
 		if (timestamp < rewardsCycleEnd) {
 			revert SyncError();

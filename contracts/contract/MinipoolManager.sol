@@ -202,7 +202,8 @@ contract MinipoolManager is Base, ReentrancyGuard, IWithdrawer {
 		if (nodeID == address(0)) {
 			revert InvalidNodeID();
 		}
-
+		// @audit: perhaps I'm not reading this code correctly. Does it actually check to ensure that at least 1000 AVAX is deposited
+		//			before it creates a minipool?
 		ProtocolDAO dao = ProtocolDAO(getContractAddress("ProtocolDAO"));
 		if (
 			// Current rule is matched funds must be 1:1 nodeOp:LiqStaker
